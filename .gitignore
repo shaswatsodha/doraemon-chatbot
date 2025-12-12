@@ -1,0 +1,31 @@
+# --- General Operating System Files ---
+.DS_Store
+Thumbs.db
+
+# --- Python & Dependencies ---
+# Virtual Environments (CRUCIAL)
+venv/
+.venv/
+env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyd
+*.so
+
+# Distribution / Build files
+dist/
+build/
+*.egg-info/
+
+# Logs and Documentation
+*.log
+
+# Sensitive Data / Local Environment Files (CRUCIAL)
+# This prevents accidentally committing API keys and other secrets.
+.env
+.flaskenv
+
+# --- Web / Frontend (If you were to use Node/NPM later) ---
+node_modules/

@@ -1,0 +1,141 @@
+/* Basic Reset and Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("/static/download.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #ff0000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+}
+
+/* MAIN — LEFT ALIGN CHAT */
+main {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;   /* ← LEFT SIDE */
+    align-items: flex-start;       /* ← TOP LEFT (optional) */
+}
+
+/* Add spacing from left edge */
+.chat-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: 50px; /* ← NICE PADDING FROM LEFT */
+}
+
+h2 {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Chat Box */
+.chat-box {
+    flex-grow: 1;
+    padding: 15px;
+    height: 400px;
+    overflow-y: auto;
+    background-color: #e6f7ff;
+}
+
+.chat-box p {
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+/* User Messages */
+.user {
+    background-color: #d1e7dd;
+    align-self: flex-end;
+    margin-left: auto;
+    text-align: right;
+}
+
+/* Bot Messages */
+.bot {
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    align-self: flex-start;
+}
+
+/* Loading */
+.loading {
+    font-style: italic;
+    color: #555;
+    background-color: #f7f7f7;
+    border-color: #ccc;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Form */
+#chatForm {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+}
+
+#chatForm button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#chatForm button:hover {
+    background-color: #cc0000;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    margin-top: auto;
+}
