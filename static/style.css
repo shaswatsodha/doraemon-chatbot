@@ -1,9 +1,10 @@
-Basic Reset and Global Styles
+/* Basic Reset and Global Styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: url("/static/download.jpg");
+    /* FIX: Corrected path to ensure image loads on deployment */
+    background: url("download.jpg") no-repeat center center fixed;
     background-size: cover;
     color: #333;
     display: flex;
@@ -24,13 +25,13 @@ h1 {
     margin: 0;
 }
 
-/* MAIN — LEFT ALIGN CHAT */
+/* MAIN — LEFT ALIGN CHAT (will be centered on mobile) */
 main {
     flex-grow: 1;
     padding: 20px;
     display: flex;
-    justify-content: flex-start;   /* ← LEFT SIDE */
-    align-items: flex-start;       /* ← TOP LEFT (optional) */
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 /* Add spacing from left edge */
@@ -43,7 +44,7 @@ main {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    margin-left: 50px; /* ← NICE PADDING FROM LEFT */
+    margin-left: 50px; /* ← NICE PADDING FROM LEFT (for desktop) */
 }
 
 h2 {
@@ -138,4 +139,32 @@ footer {
     background-color: #333;
     color: white;
     margin-top: auto;
+}
+
+/* --- MOBILE RESPONSIVENESS (MEDIA QUERY) --- */
+@media (max-width: 600px) {
+    
+    /* Center the chat container on narrow screens */
+    main {
+        padding: 10px;
+        justify-content: center; 
+        align-items: flex-start;
+    }
+
+    /* Adjust the chat container to take up more space and center */
+    .chat-container {
+        width: 95%;
+        max-width: 100%;
+        margin-left: 0; /* Remove desktop-only margin */
+        margin: 0 auto; /* Center the container */
+    }
+    
+    /* Make input area slightly more compact */
+    #chatForm {
+        padding: 10px; 
+    }
+    
+    #userInput {
+        font-size: 14px;
+    }
 }
