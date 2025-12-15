@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 console.error("Error:", error);
 
-                const fallback = "Arre Nobi-chan! The Anywhere Door got stuck!";
+                const fallback = "Arre Nobita! The Anywhere Door got stuck!";
                 appendMessage(fallback, "bot error");
 
                 speakDoraemon(fallback);
