@@ -1,20 +1,11 @@
-// ================================
-// Doraemon Chat - With Voice Output
-// ================================
-
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Doraemon Chat Loaded");
 
     const form = document.getElementById("chatForm");
     const chatBox = document.getElementById("chatBox");
     const input = document.getElementById("userInput");
-
-    // Needed so Chrome loads voices
     window.speechSynthesis.onvoiceschanged = () => {};
 
-    // -----------------------------
-    // VOICE TOGGLE LOGIC
-    // -----------------------------
     let isVoiceEnabled = true;
     const voiceToggle = document.getElementById('voiceToggle');
 
@@ -22,14 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         voiceToggle.addEventListener('change', () => {
             isVoiceEnabled = voiceToggle.checked;
             if (!isVoiceEnabled) {
-                window.speechSynthesis.cancel(); // Stop speaking immediately
+                window.speechSynthesis.cancel(); 
             }
         });
     }
-
-    // -----------------------------
-    // SPEECH FUNCTION (Doraemon Output)
-    // -----------------------------
     function speakDoraemon(text) {
         if (!isVoiceEnabled) {
             return;
@@ -42,21 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const utter = new SpeechSynthesisUtterance(text);
         const voices = window.speechSynthesis.getVoices();
-
-        // Prioritize Indian Accent & Doraemon-like Voices
         const chosen = 
-            // 1. Explicitly check for known Indian/Hindi voices
             voices.find(v => v.lang === "en-IN" || v.lang === "hi-IN") ||
             voices.find(v => /Rishi|Lekha|Anushka|Vidya|Indian/i.test(v.name)) ||
-            // 2. Fallback to any friendly/childish voice
             voices.find(v => /child|girl|female/i.test(v.name)) ||
-            // 3. Absolute fallback
             voices[0];
 
         if (chosen) utter.voice = chosen;
 
-        // Doraemon-like tone (playful, friendly, slightly higher pitch)
-        utter.pitch = 1.25; 
+        utter.pitch = 1.4; 
         utter.rate = 0.95;  
         utter.volume = 1;
 
@@ -64,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         window.speechSynthesis.speak(utter);
     }
 
-    // --- SPEECH-TO-TEXT LOGIC (User Input) ---
     const micButton = document.getElementById("micButton");
 
     if (micButton && "webkitSpeechRecognition" in window) {
@@ -107,11 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (micButton) {
         micButton.style.display = 'none';
     }
-    // ------------------------------------------------
-
-    // -----------------------------
-    // MESSAGE SENDING LOGIC
-    // -----------------------------
     if (form && chatBox && input) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -157,10 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
-    // -----------------------------
-    // HELPER: ADD MESSAGE TO CHAT
-    // -----------------------------
     function appendMessage(text, className) {
         const p = document.createElement("p");
         p.classList.add(className.split(" ")[0]);
