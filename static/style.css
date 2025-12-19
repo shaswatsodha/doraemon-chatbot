@@ -1,170 +1,284 @@
 /* Basic Reset and Global Styles */
+:root {
+    --dora-blue: #00a0e9;
+    --dora-red: #ff0000;
+    --user-bg: #e1ffc7;
+    --bot-bg: #ffffff;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    /* FIX: Corrected path to ensure image loads on deployment */
-    background: url("download.jpg") no-repeat center center fixed;
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("download.jpg") no-repeat center center fixed;
     background-size: cover;
     color: #333;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* Header */
 header {
-    background-color: #ff0000;
+    background-color: var(--dora-red);
     color: white;
-    padding: 20px;
+    padding: 1.5rem;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
-h1 {
+header h1 {
     margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* MAIN — LEFT ALIGN CHAT (will be centered on mobile) */
+header p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Main Layout */
 main {
     flex-grow: 1;
-    padding: 20px;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center; /* Centered by default for a clean look */
+    align-items: center;
+    padding: 20px;
 }
 
-/* Add spacing from left edge */
+/* Chat Container */
 .chat-container {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    margin-left: 50px; /* ← NICE PADDING FROM LEFT (for desktop) */
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 h2 {
-    background-color: #007bff;
+    background-color: var(--dora-blue);
     color: white;
-    padding: 10px;
+    padding: 15px;
     margin: 0;
     text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
-/* Chat Box */
+/* Voice Settings Bar */
+.voice-settings {
+    padding: 8px 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+/* Chat Box Area */
 .chat-box {
     flex-grow: 1;
-    padding: 15px;
-    height: 400px;
+    padding: 20px;
     overflow-y: auto;
-    background-color: #e6f7ff;
+    background-color: #f0f7ff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth;
 }
 
+/* Message Bubbles */
 .chat-box p {
-    margin: 8px 0;
-    padding: 10px 15px;
-    border-radius: 20px;
-    max-width: 80%;
-    word-wrap: break-word;
+    margin: 0;
+    padding: 12px 18px;
+    border-radius: 18px;
+    max-width: 85%;
+    line-height: 1.5;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-/* User Messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* User Message Styling */
 .user {
-    background-color: #d1e7dd;
+    background-color: var(--user-bg);
     align-self: flex-end;
-    margin-left: auto;
-    text-align: right;
+    border-bottom-right-radius: 4px;
+    color: #000;
+    border: 1px solid #dcf8c6;
 }
 
-/* Bot Messages */
+/* Bot Message Styling */
 .bot {
-    background-color: #ffffff;
-    border: 1px solid #007bff;
+    background-color: var(--bot-bg);
     align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #e0e0e0;
 }
 
-/* Loading */
+/* Loading State */
 .loading {
     font-style: italic;
-    color: #555;
-    background-color: #f7f7f7;
-    border-color: #ccc;
-    animation: pulse 1.5s infinite;
+    color: #666;
+    background-color: #ffffff;
+    border: 1px dashed var(--dora-blue) !important;
+    animation: typingPulse 1.5s infinite ease-in-out;
 }
 
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+@keyframes typingPulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
 }
 
-/* Form */
+/* Chat Form & Input */
 #chatForm {
     display: flex;
-    padding: 15px;
-    border-top: 1px solid #ccc;
+    padding: 20px;
+    background: white;
+    gap: 10px;
+    border-top: 1px solid #eee;
 }
 
 #userInput {
     flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    font-size: 16px;
+    padding: 12px 20px;
+    border: 2px solid #eee;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
-#chatForm button {
-    background-color: #ff0000;
+#userInput:focus {
+    border-color: var(--dora-blue);
+}
+
+/* Buttons */
+.btn-action {
+    background-color: var(--dora-red);
     color: white;
     border: none;
-    padding: 10px 15px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
-    border-radius: 0 5px 5px 0;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
 }
 
-#chatForm button:hover {
+.btn-action:hover {
     background-color: #cc0000;
+    transform: scale(1.1);
+}
+
+.btn-submit {
+    padding: 0 25px !important;
+    border-radius: 25px !important;
+    width: auto !important;
+    font-weight: bold;
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    margin-top: auto;
+    padding: 15px;
+    background-color: #222;
+    color: #888;
+    font-size: 0.8rem;
 }
 
-/* --- MOBILE RESPONSIVENESS (MEDIA QUERY) --- */
+/* Scrollbar Customization */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/* --- RESPONSIVENESS --- */
+
+/* For Tablet and Desktop */
+@media (min-width: 768px) {
+    .chat-container {
+        height: 75vh;
+        margin: 20px;
+    }
+}
+
+/* For Mobile */
 @media (max-width: 600px) {
-    
-    /* Center the chat container on narrow screens */
-    main {
-        padding: 10px;
-        justify-content: center; 
-        align-items: flex-start;
+    body {
+        background-attachment: scroll; /* Better for mobile performance */
     }
 
-    /* Adjust the chat container to take up more space and center */
+    header {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding: 0;
+        align-items: flex-end; /* Chat sticks to bottom on mobile */
+    }
+
     .chat-container {
-        width: 95%;
-        max-width: 100%;
-        margin-left: 0; /* Remove desktop-only margin */
-        margin: 0 auto; /* Center the container */
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+        margin: 0;
+        animation: none; /* Disable heavy animation on mobile start */
     }
-    
-    /* Make input area slightly more compact */
+
+    .chat-box {
+        padding: 15px;
+    }
+
+    .chat-box p {
+        max-width: 90%;
+        font-size: 0.95rem;
+    }
+
     #chatForm {
-        padding: 10px; 
+        padding: 12px;
+        padding-bottom: 25px; /* Extra space for home indicators */
     }
-    
+
     #userInput {
-        font-size: 14px;
+        font-size: 16px; /* Prevents auto-zoom on iOS */
     }
 }
