@@ -6,31 +6,77 @@
   <title>Chat with Doraemon</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-ai">
-  
+<body>
 
   <header>
     <h1>PocketBot</h1>
-    <p>Ask me anything! I might just have a gadget for your problem!</p>
+    <p>Ask me anything, Nobita! Doraemon might have a gadget for it!</p>
   </header>
 
   <main>
     <section class="chat-container">
       <h2>Talk to the Future!</h2>
-      
-      <div style="padding: 10px; background-color: #f0f8ff; border-bottom: 1px solid #ddd; text-align: right;">
-          <label for="voiceToggle" style="color: #333; font-size: small;">Voice: </label>
-          <input type="checkbox" id="voiceToggle" checked>
-      </div>
-      
-      <div class="chat-box" id="chatBox">
-        <p class="bot">Hello! I am Doraemon. How can I help you today, Nobita? Dora!</p>
+
+      <!-- Doraemon GIF area -->
+      <div class="dora-wrapper">
+        <img id="doraGif" src="/static/sitting.gif" alt="Doraemon" class="dora-gif">
       </div>
 
+      <!-- Voice toggle bar -->
+      <div class="voice-settings">
+        <label for="voiceToggle">Voice:</label>
+        <input type="checkbox" id="voiceToggle" checked>
+      </div>
+
+      <!-- Quick action chips -->
+      <div class="quick-actions">
+        <button type="button" data-action="weather">☀ Weather</button>
+        <button type="button" data-action="timer">⏱ Timer</button>
+        <button type="button" data-action="volume">🔊 Volume</button>
+        <button type="button" data-action="brightness">💡 Brightness</button>
+      </div>
+
+      <!-- Chat box -->
+      <div class="chat-box" id="chatBox">
+        <!-- JS will inject the first Doraemon message -->
+      </div>
+
+      <!-- Custom action modal for values -->
+      <div id="actionModal" class="action-modal hidden">
+        <div class="action-modal-content">
+          <h3 id="actionTitle">Set value</h3>
+          <p id="actionHint">Enter a value for Doraemon’s gadget:</p>
+          <input type="number" id="actionInput" min="0" max="100">
+          <div class="action-modal-buttons">
+            <button type="button" id="actionCancel">Cancel</button>
+            <button type="button" id="actionOk">OK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alarm bar + sound for timer -->
+      <div id="alarmBar" class="alarm-bar hidden">
+        <span>⏰ Time-Time Clock is ringing!</span>
+        <button type="button" id="alarmStopBtn">Dismiss</button>
+      </div>
+
+      <audio id="alarmSound" src="/static/alarm.mp3" preload="auto" loop></audio>
+
+      <!-- Input form -->
       <form id="chatForm">
-        <input type="text" id="userInput" placeholder="Type or click the mic to speak..." required>
-        <button type="button" id="micButton" title="Speak to Doraemon">🎤</button> 
-        <button type="submit">Send</button>
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type or click the mic to speak..."
+          autocomplete="off"
+          required
+        >
+        <button type="button" id="micButton" class="btn-action" title="Speak to Doraemon">
+          🎤
+        </button>
+        <button type="submit" class="btn-action btn-submit">
+          Send
+        </button>
       </form>
     </section>
   </main>
@@ -40,6 +86,5 @@
   </footer>
 
   <script src="/static/script.js"></script>
-
 </body>
 </html>
